@@ -1,0 +1,295 @@
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  3. Allow percentage-based heights in the application
+*/
+html,
+body {
+  height: 100%;
+  min-width: 320px;
+  background-color: var(--bg-color);
+}
+/*
+  Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  6. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  7. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+  8. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/*
+  9. Create a root stacking context
+*/
+$base_width: 1024px;
+:root {
+  isolation: isolate;
+  --bg-color: #ced8e4;
+}
+
+.Heading {
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  line-height: 72px;
+  font-size: 48px;
+}
+#app {
+  padding: 8px;
+}
+
+.reserved {
+  color: #3bb94c;
+}
+
+.seated {
+  color: #162149;
+}
+
+.ReservationWrapper {
+  display: flex;
+  width: 100%;
+  gap: 16px;
+}
+@media (max-width: $base_width) {
+  .ReservationWrapper {
+    gap: 0px;
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+@media (min-width: $base_width) {
+  .ReservationList {
+    height: 600px;
+    overflow: scroll;
+  }
+}
+.ReservationList {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  padding: 8px 0px;
+  gap: 8px;
+}
+
+.Reservation {
+  display: flex;
+
+  padding: 8px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  height: 134px;
+  align-items: center;
+  justify-content: stretch;
+  gap: 16px;
+}
+
+.Reservation__label-group {
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  gap: 16px;
+  height: 100%;
+}
+
+.Reservation__label-group--center {
+  overflow: hidden;
+
+  height: 100%;
+  flex-grow: 1;
+  flex-shrink: 1;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  gap: 8px;
+}
+.Reservation__label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 320px;
+}
+
+.Reservation__button {
+  flex-grow: 0;
+  flex-shrink: 0;
+  display: block;
+  min-width: 100px;
+  min-height: 50px;
+  border-radius: 8px;
+  border: 0;
+  color: #ffffff;
+  background-color: #162149;
+}
+
+$ReservationInfoHeight: 600px;
+.ReservationInfo {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  flex-grow: 0;
+  gap: 32px;
+  padding: 16px;
+  border-radius: 16px;
+  height: $ReservationInfoHeight;
+}
+
+.ReservationInfo__group {
+  width: 100%;
+}
+
+.ReservationInfo__group-button {
+  display: none;
+}
+
+@media (max-width: $base_width) {
+  .ReservationInfo {
+    display: none;
+  }
+  .ReservationInfo.open {
+    width: 100%;
+    display: flex;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    z-index: 1;
+    animation: slidein 0.5s ease-in;
+  }
+  .ReservationInfo__group-button {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    background-color: transparent;
+    border: 0;
+    font-size: 18px;
+  }
+}
+
+.ReservationInfo__description {
+  width: 100%;
+  display: flex;
+  gap: 16px;
+}
+.ReservationInfo__description--label {
+  color: gray;
+  flex-shrink: 0;
+}
+.ReservationInfo__heading {
+  position: relative;
+}
+
+.ReservationInfo__description--valuel {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.Reservation__description--value-maxrow3 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+@media (max-width: $base_width) {
+  .Dim.open {
+    position: fixed;
+    isolation: isolate;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .Dim__overlay.open {
+    position: absolute;
+    background-color: black;
+    opacity: 0.9;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    animation: godark 0.3s ease-in;
+  }
+}
+
+@keyframes slidein {
+  from {
+    transform: translateY($ReservationInfoHeight);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes godark {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.9;
+  }
+}

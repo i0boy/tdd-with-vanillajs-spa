@@ -1,0 +1,12 @@
+{
+  "plugins": ["stylelint-no-unsupported-browser-features"],
+  "extends": "stylelint-config-standard-scss",
+  "rules": {
+    "plugin/no-unsupported-browser-features": [
+      true,
+      {
+        "browsers": ["ie >= 11"]
+      }
+    ]
+  }
+}
